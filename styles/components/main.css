@@ -3,7 +3,7 @@ main {
 }
 
 .map-container {
-    padding-top: 2rem;
+    padding: 2rem 0;
 }
 
 .map-container > * {
@@ -14,14 +14,15 @@ main {
     flex-basis: 20%;
 }
 
-.locs .card > *:not(:first-child) {
-    padding-left: 20px;
+.card {
+    width: 60%;
+    justify-content: space-between;
 }
 
 .locs .card button {
     align-self: center;
     justify-self: center;
-
+    text-align: center;
 }
 
 .btn-user-pos {
