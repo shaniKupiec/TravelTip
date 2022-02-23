@@ -8,6 +8,7 @@ window.onAddMarker = onAddMarker;
 window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
+window.onSearch = onSearch
 
 // render map
 function onInit() {
@@ -16,6 +17,11 @@ function onInit() {
             console.log('Map is ready');
         })
         .catch(() => console.log('Error: cannot init map'));
+}
+
+function onSearch(ev) {
+    ev.preventDefault();
+    const elInputSearch = document.querySelector('input[type=search]');
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition

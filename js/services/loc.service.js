@@ -1,6 +1,6 @@
 'use strict'
 
-import { storageService } from './services/storage-service.js'
+import { storageService } from './storage-service.js'
 
 export const locService = {
     getLocs,
@@ -17,7 +17,7 @@ var gSavedLocs = storageService.loadFromStorage(LOCS_KEY) || []
 function getLocs() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve(locs);
+            resolve(gSavedLocs);
         }, 2000)
     });
 }
