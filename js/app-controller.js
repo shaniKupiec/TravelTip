@@ -13,8 +13,7 @@ window.onSearch = onSearch;
 window.onDeleteLoc = onDeleteLoc;
 window.onCopyLoc = onCopyLoc;
 
-//TODO: add marker on saved from storage 
-// TODO: delete
+//TODO: add marker on saved from storage
 // TODO: add onPanTo to show on map - on users location
 
 var gCurrLocIdx = -1;
@@ -27,6 +26,11 @@ function onInit() {
       renderLoc();
     })
     .catch(() => console.log("Error: cannot init map"));
+  locService.getLocs().then((locs) => {
+    locs.forEach((loc) => {
+      onAddMarker({ lat: loc.lat, lng: loc.lng }, loc.id);
+    });
+  });
 }
 
 // on user search show on map, add marker, save location
@@ -37,7 +41,7 @@ function onSearch(ev) {
     .searchByTxt(inputVal)
     .then((pos) => {
       // mapService.addMarker(pos)
-      onAddMarker(pos);
+      onAddMarker(pos, inputVal);
       mapService.panTo(pos.lat, pos.lng);
       var currName = locService.formatAdderss(inputVal);
       _renderCurrLocName(currName);
@@ -76,19 +80,22 @@ function getPosition() {
 }
 
 // calling to the service to add marker
-function onAddMarker(pos) {
+function onAddMarker(pos, locIdx) {
   console.log("Adding a marker");
-  mapService.addMarker(pos);
+  mapService.addMarker(pos, locIdx);
 }
 
 function onDeleteLoc(locIdx) {
   locService.deleteLoc(locIdx);
   renderLoc();
+  if (gCurrLocIdx !== locIdx) return;
   locService.getLocs().then((locs) => {
-    if (!locs.length) return; // add then its the last one
-    gCurrLocIdx = 0;
+    if (!locs.length) {
+      // when the user deletes the last one
+      _renderCurrLocName("");
+      return;
+    }
     _renderCurrLocName(locs[0].name);
-    console.log('moving to', locs[0].name);
     mapService.panTo(locs[0].lat, locs[0].lng, locs[0].name, locs[0].id);
   });
 }
@@ -96,9 +103,6 @@ function onDeleteLoc(locIdx) {
 // shows saved locs, render
 function onGetLocs() {
   locService.getLocs().then((locs) => {
-    gCurrLocIdx = locs.length;
-    console.log("gCurrLocIdx", gCurrLocIdx);
-    console.log("Locations:", locs);
     document.querySelector(".locs").innerText = JSON.stringify(locs);
   });
 }

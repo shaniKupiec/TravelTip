@@ -10,6 +10,7 @@ export const mapService = {
 };
 
 var gMap;
+var gMarkers = {};
 
 // function removeMarker()
 
@@ -45,12 +46,13 @@ function searchByTxt(address) {
 }
 
 // adds marker according to chosen loc
-function addMarker(loc) {
+function addMarker(loc, locIdx) {
   var marker = new google.maps.Marker({
     position: loc,
     map: gMap,
     // title: "Hello World!",
   });
+  gMarkers[locIdx] = marker
   return marker;
 }
 
