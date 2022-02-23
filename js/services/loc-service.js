@@ -40,7 +40,7 @@ function addSaveLoc(name, lat, lng){
 function deleteLoc(locIdx){
     var locToDeleteIdx = gSavedLocs.findIndex(loc => loc.id === locIdx)
     gSavedLocs.splice(locToDeleteIdx, 1)
-    gSavedLocs.push(newLoc)
+    storageService.saveToStorage(LOCS_KEY, gSavedLocs)
 }
 
 function _createSavedLoc(name, lat, lng){

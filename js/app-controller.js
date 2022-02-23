@@ -22,12 +22,14 @@ function onInit() {
         .catch(() => console.log('Error: cannot init map'));
 }
 
+// on user search show on map, add marker, save location
 function onSearch(ev) {
     ev.preventDefault();
     const inputVal = document.querySelector('input[type=search]').value    
     mapService.searchByTxt(inputVal)
     .then(pos => {
-        mapService.addMarker(pos)
+        // mapService.addMarker(pos)
+        onAddMarker(pos)
         mapService.panTo(pos.lat, pos.lng)
         document.querySelector('.loc-name span').innerText = inputVal
         renderLoc()
@@ -39,6 +41,7 @@ function onCopyLoc() {
 
 }
 
+// render prev locations
 function renderLoc() {
     locService.getLocs()
     .then(locs => {
@@ -47,13 +50,12 @@ function renderLoc() {
                     <p>Lat: ${loc.lat}</p>
                     <p>Lng: ${loc.lng}</p>
                     <button onclick="onDeleteLoc('${loc.id}')">Delete</button>
+                    <button onclick="onPanTo(${loc.lat}, ${loc.lng})">GO</button>
             `
         })
         document.querySelector('.locs').innerHTML = strHTMLs.join('')
     })
 }
-
-
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
 function getPosition() {
@@ -65,9 +67,13 @@ function getPosition() {
 
 // calling to the service to add marker
 // TODO: need to add curr pos
-function onAddMarker() {
+function onAddMarker(pos) {
     console.log('Adding a marker');
-    mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 });
+    mapService.addMarker(pos);
+}
+
+function onDeleteLoc(locIdx){
+    locService.deleteLoc(locIdx)
 }
 
 // shows saved locs, render
@@ -95,7 +101,7 @@ function onGetUserPos() {
 
 // render map according to chosed loc
 // TODO: get wanted loc
-function onPanTo() {
+function onPanTo(lat, lng) {
     console.log('Panning the Map');
-    mapService.panTo(35.6895, 139.6917);
+    mapService.panTo(lat, lng);
 }

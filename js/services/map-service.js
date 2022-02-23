@@ -49,10 +49,12 @@ function addMarker(loc) {
   var marker = new google.maps.Marker({
     position: loc,
     map: gMap,
-    title: "Hello World!",
+    // title: "Hello World!",
   });
   return marker;
 }
+
+// function removeMarker()
 
 // shows new loc on map
 function panTo(lat, lng) {
