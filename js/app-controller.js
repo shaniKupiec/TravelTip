@@ -13,9 +13,6 @@ window.onSearch = onSearch;
 window.onDeleteLoc = onDeleteLoc;
 window.onCopyLoc = onCopyLoc;
 
-//TODO: add marker on saved from storage
-// TODO: add onPanTo to show on map - on users location
-
 var gCurrLocIdx = -1;
 
 // render map
@@ -39,10 +36,10 @@ function onSearch(ev) {
   const inputVal = document.querySelector("input[type=search]").value;
   mapService
     .searchByTxt(inputVal)
-    .then((pos) => {
-      // mapService.addMarker(pos)
-      onAddMarker(pos, inputVal);
-      mapService.panTo(pos.lat, pos.lng);
+    .then((loc) => {
+      // mapService.addMarker(loc)
+      onAddMarker({lat: loc.lat, lng: loc.lng}, loc.id);
+      mapService.panTo(loc.lat, loc.lng);
       var currName = locService.formatAdderss(inputVal);
       _renderCurrLocName(currName);
       renderLoc();
@@ -88,6 +85,7 @@ function onAddMarker(pos, locIdx) {
 function onDeleteLoc(locIdx) {
   locService.deleteLoc(locIdx);
   renderLoc();
+  mapService.removeMarker(locIdx)
   if (gCurrLocIdx !== locIdx) return;
   locService.getLocs().then((locs) => {
     if (!locs.length) {

@@ -7,12 +7,11 @@ export const mapService = {
   addMarker,
   panTo,
   searchByTxt,
+  removeMarker
 };
 
 var gMap;
 var gMarkers = {};
-
-// function removeMarker()
 
 // init map on load
 function initMap(lat = 32.0749831, lng = 34.9120554) {
@@ -36,8 +35,8 @@ function searchByTxt(address) {
     .then((res) => {
       var pos = res.data.results[0].geometry.location
       console.log(pos);
-      locService.addSaveLoc(address, pos.lat, pos.lng)
-      return pos
+      var loc = locService.addSaveLoc(address, pos.lat, pos.lng)
+      return loc
     })
     .catch((err) => {
       console.log(err, "oops");
@@ -54,6 +53,12 @@ function addMarker(loc, locIdx) {
   });
   gMarkers[locIdx] = marker
   return marker;
+}
+
+function removeMarker(markerIdx){
+  for (const idxLoc in gMarkers) {
+    if(idxLoc == markerIdx) gMarkers[idxLoc].setMap(null)
+  }
 }
 
 // shows new loc on map

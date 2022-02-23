@@ -25,12 +25,17 @@ function getLocs() {
 // saves location that the user search
 function addSaveLoc(name, lat, lng){
     var olderLocIdx = gSavedLocs.findIndex(loc => loc.name === name)
+    var currLocObj;
     if(olderLocIdx < 0){
-        var newLoc = _createSavedLoc(name, lat, lng)
-        gSavedLocs.push(newLoc)
-    } else gSavedLocs[olderLocIdx].updatedAt = Date.now()
+        currLocObj = _createSavedLoc(name, lat, lng)
+        gSavedLocs.push(currLocObj)
+    } else {
+        gSavedLocs[olderLocIdx].updatedAt = Date.now()
+        currLocObj = gSavedLocs[olderLocIdx]
+    }
     storageService.saveToStorage(LOCS_KEY, gSavedLocs)
     console.log(gSavedLocs);
+    return currLocObj
 }
 
 // gets index of loc to delete
