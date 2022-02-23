@@ -1,3 +1,22 @@
 header {
     height: 150px;
+    background-color: var(--color1);
+    padding: 20px;
+    border-bottom: 2px solid whitesmoke;
+}
+
+header .header-container .logo {
+    height: 100%;
+}
+
+header .header-container .logo h1 {
+    height: 100%;
+    font-family: debby;
+    color: whitesmoke;
+    font-size: 5rem;
+    letter-spacing: 0.25rem;
+}
+
+header .header-container form > * {
+    height: 50px;
 }
