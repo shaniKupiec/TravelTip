@@ -2,3 +2,8 @@
     font-family: debby;
     src: url('../fonts/Debby.ttf')
 }
+
+@font-face {
+    font-family: yanone;
+    src: url('../fonts/Yanone.ttf')
+}

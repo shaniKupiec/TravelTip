@@ -1,0 +1,12 @@
+.map-container .map-info {
+    justify-content: center;
+}
+
+.map-container > * {
+    flex-basis: 50%;
+}
+
+.map-container .map-info > * {
+    flex-basis: 50%;
+
+}
