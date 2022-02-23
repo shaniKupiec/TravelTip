@@ -1,5 +1,10 @@
 'use strict'
 
+export const storageService = {
+    saveToStorage,
+    loadFromStorage
+}
+
 function saveToStorage(key, val) {
     const str = JSON.stringify(val)
     localStorage.setItem(key, str)

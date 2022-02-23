@@ -1,14 +1,16 @@
 'use strict'
 
+import { storageService } from './services/storage-service.js'
+
 export const locService = {
-    getLocs
+    getLocs,
+    addSaveLoc,
+    deleteLoc
 }
 
-
-const locs = [
-    { name: 'Greatplace', lat: 32.047104, lng: 34.832384 }, 
-    { name: 'Neveragain', lat: 32.047201, lng: 34.832581 }
-]
+const LOCS_KEY = 'locations-data'
+var gId = 100;
+var gSavedLocs = storageService.loadFromStorage(LOCS_KEY) || []
 
 // return all saved locs
 // WHY: set time out??
@@ -20,7 +22,30 @@ function getLocs() {
     });
 }
 
-// TODO: save to local storage saved locs
-// TODO: func createlocation
-// {id, name, lat, lng, weather, createdAt, updatedAt}
-// TODO: deleteloc
+// saves location that the user search
+// TODO: link to service function search
+function addSaveLoc(name, lat, lng){
+    var newLoc = _createSavedLoc(name, lat, lng)
+    gSavedLocs.push(newLoc)
+    storageService.saveToStorage(LOCS_KEY, gSavedLocs)
+}
+
+// gets index of loc to delete
+// connect to onDeleteLoc
+function deleteLoc(locIdx){
+    var locToDeleteIdx = gSavedLocs.findindex(loc => loc.id === locIdx)
+    gSavedLocs.splice(locToDeleteIdx, 1)
+    gSavedLocs.push(newLoc)
+}
+
+function _createSavedLoc(name, lat, lng){
+    return {
+        id: gId++,
+        name,
+        lat,
+        lng,
+        // weather,
+        createdAt: Date.now(),
+        // updatedAt
+    }
+}
