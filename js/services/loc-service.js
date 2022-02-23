@@ -5,7 +5,8 @@ import { storageService } from './storage-service.js'
 export const locService = {
     getLocs,
     addSaveLoc,
-    deleteLoc
+    deleteLoc,
+    formatAdderss
 }
 
 const LOCS_KEY = 'locations-data'
@@ -23,7 +24,6 @@ function getLocs() {
 }
 
 // saves location that the user search
-// TODO: link to service function search
 function addSaveLoc(name, lat, lng){
     console.log(gSavedLocs)
     var olderLocIdx = gSavedLocs.findIndex(loc => loc.name === name)
@@ -36,7 +36,6 @@ function addSaveLoc(name, lat, lng){
 }
 
 // gets index of loc to delete
-// TODO: connect to onDeleteLoc
 function deleteLoc(locIdx){
     var locToDeleteIdx = gSavedLocs.findIndex(loc => loc.id === locIdx)
     gSavedLocs.splice(locToDeleteIdx, 1)
@@ -46,11 +45,17 @@ function deleteLoc(locIdx){
 function _createSavedLoc(name, lat, lng){
     return {
         id: gId++,
-        name,
+        name: formatAdderss(name),
         lat,
         lng,
         // weather,
         createdAt: Date.now(),
         updatedAt: Date.now()
     }
+}
+
+function formatAdderss(name){
+    var words = name.split(' ')
+    var newWords = words.map( word => word[0].toUpperCase() + word.substring(1))
+    return newWords.join(' ')
 }

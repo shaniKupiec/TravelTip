@@ -11,6 +11,7 @@ window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
 window.onSearch = onSearch;
+window.onDeleteLoc = onDeleteLoc;
 window.onCopyLoc = onCopyLoc;
 
 // render map
@@ -31,7 +32,8 @@ function onSearch(ev) {
         // mapService.addMarker(pos)
         onAddMarker(pos)
         mapService.panTo(pos.lat, pos.lng)
-        document.querySelector('.loc-name span').innerText = inputVal
+        var currName = locService.formatAdderss(inputVal)
+        _renderCurrLocName(currName);
         renderLoc()
     })
     .catch(err => console.log('error123'))
@@ -48,10 +50,10 @@ function renderLoc() {
         const strHTMLs = locs.map(loc => {
             return`<div class="card flex">
             <p>Name: ${loc.name}</p>
-                    <p>Lat: ${loc.lat}</p>
-                    <p>Lng: ${loc.lng}</p>
+                    <p>Lat: ${Math.floor(loc.lat)}</p>
+                    <p>Lng: ${Math.floor(loc.lng)}</p>
                     <button onclick="onDeleteLoc('${loc.id}')">Delete</button>
-                    <button onclick="onPanTo(${loc.lat}, ${loc.lng})">GO</button>
+                    <button onclick="onPanTo(${loc.lat}, ${loc.lng}, '${loc.name}')">GO</button>
                     </div>
             `
         })
@@ -76,6 +78,7 @@ function onAddMarker(pos) {
 
 function onDeleteLoc(locIdx){
     locService.deleteLoc(locIdx)
+    renderLoc()
 }
 
 // shows saved locs, render
@@ -102,8 +105,12 @@ function onGetUserPos() {
 }
 
 // render map according to chosed loc
-// TODO: get wanted loc
-function onPanTo(lat, lng) {
+function onPanTo(lat, lng, locName) {
     console.log('Panning the Map');
     mapService.panTo(lat, lng);
+    _renderCurrLocName(locName)
+}
+
+function _renderCurrLocName(val){
+    document.querySelector('.loc-name span').innerText = val
 }

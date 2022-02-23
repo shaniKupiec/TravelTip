@@ -34,7 +34,7 @@ function searchByTxt(address) {
     .get(geoUrl)
     .then((res) => {
       var pos = res.data.results[0].geometry.location
-      console.log(res.data.results[0].geometry.location);
+      console.log(pos);
       locService.addSaveLoc(address, pos.lat, pos.lng)
       return pos
     })
