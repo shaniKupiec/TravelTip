@@ -1,7 +1,8 @@
 'use strict'
 
-import { mapService } from './services/map.service.js'
-import { locService } from './services/loc.service.js'
+import { mapService } from './services/map-service.js'
+import { locService } from './services/loc-service.js'
+import { weatherService } from './services/weather-service.js'
 
 
 window.onload = onInit;
@@ -49,7 +50,7 @@ function renderLoc() {
                     <button onclick="onDeleteLoc('${loc.id}')">Delete</button>
             `
         })
-        document.querySelector('.loc-table').innerHTML = strHTMLs.join('')
+        document.querySelector('.locs').innerHTML = strHTMLs.join('')
     })
 }
 

@@ -25,8 +25,10 @@ function getLocs() {
 // saves location that the user search
 // TODO: link to service function search
 function addSaveLoc(name, lat, lng){
+    console.log(gSavedLocs)
     var olderLocIdx = gSavedLocs.findIndex(loc => loc.name === name)
-    if(olderLocIdx === -1){
+    console.log(olderLocIdx)
+    if(olderLocIdx < 0){
         var newLoc = _createSavedLoc(name, lat, lng)
         gSavedLocs.push(newLoc)
     } else gSavedLocs[olderLocIdx].updatedAt = Date.now()

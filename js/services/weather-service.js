@@ -4,9 +4,6 @@ export const weatherService = {
   getWeather,
 };
 
-var x = getWeather(31, 35);
-console.log(x);
-
 function getWeather(lat, lng) {
   lat = 31;
   lng = 35;
