@@ -1,12 +1,13 @@
 "use strict";
 
-import { locService } from './loc-service.js'
+import { locService } from './loc-service.js';
 
 export const mapService = {
   initMap,
   addMarker,
   panTo,
   searchByTxt,
+  onMoveLocation
 };
 
 var gMap;
@@ -23,7 +24,19 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
       center: { lat, lng },
       zoom: 15,
     });
+    gMap.addListener('click', (e) => {
+      onMoveLocation(e.latLng);
+    });
   });
+}
+
+function onMoveLocation(pos) {
+  var position = {
+    lat: pos.lat(),
+    lng: pos.lng()
+  };
+  panTo(position.lat, position.lng);
+  addMarker(position);
 }
 
 function searchByTxt(address) {
@@ -34,10 +47,10 @@ function searchByTxt(address) {
   const prm = axios
     .get(geoUrl)
     .then((res) => {
-      var pos = res.data.results[0].geometry.location
+      var pos = res.data.results[0].geometry.location;
       console.log(pos);
-      locService.addSaveLoc(address, pos.lat, pos.lng)
-      return pos
+      locService.addSaveLoc(address, pos.lat, pos.lng);
+      return pos;
     })
     .catch((err) => {
       console.log(err, "oops");
@@ -52,7 +65,7 @@ function addMarker(loc, locIdx) {
     map: gMap,
     // title: "Hello World!",
   });
-  gMarkers[locIdx] = marker
+  gMarkers[locIdx] = marker;
   return marker;
 }
 

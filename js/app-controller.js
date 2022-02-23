@@ -14,7 +14,6 @@ window.onDeleteLoc = onDeleteLoc;
 window.onCopyLoc = onCopyLoc;
 
 //TODO: add marker on saved from storage
-// TODO: add onPanTo to show on map - on users location
 
 var gCurrLocIdx = -1;
 
