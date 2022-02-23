@@ -1,7 +1,8 @@
 'use strict'
 
-import { locService } from './services/loc.service.js'
-import { mapService } from './services/map.service.js'
+import { locService } from './services/loc-service.js'
+import { mapService } from './services/map-service.js'
+import { weatherService } from './services/weather-service'
 
 window.onload = onInit;
 window.onAddMarker = onAddMarker;

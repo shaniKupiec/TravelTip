@@ -25,13 +25,16 @@ function getLocs() {
 // saves location that the user search
 // TODO: link to service function search
 function addSaveLoc(name, lat, lng){
-    var newLoc = _createSavedLoc(name, lat, lng)
-    gSavedLocs.push(newLoc)
+    var olderLocIdx = gSavedLocs.findindex(loc => loc.name === name)
+    if(!olderLocIdx){
+        var newLoc = _createSavedLoc(name, lat, lng)
+        gSavedLocs.push(newLoc)
+    } else gSavedLocs[olderLocIdx].updatedAt = Date.now()
     storageService.saveToStorage(LOCS_KEY, gSavedLocs)
 }
 
 // gets index of loc to delete
-// connect to onDeleteLoc
+// TODO: connect to onDeleteLoc
 function deleteLoc(locIdx){
     var locToDeleteIdx = gSavedLocs.findindex(loc => loc.id === locIdx)
     gSavedLocs.splice(locToDeleteIdx, 1)
@@ -46,6 +49,6 @@ function _createSavedLoc(name, lat, lng){
         lng,
         // weather,
         createdAt: Date.now(),
-        // updatedAt
+        updatedAt: Date.now()
     }
 }
