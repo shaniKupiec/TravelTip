@@ -1,8 +1,14 @@
 .nav-container {
     height: 100px;
     background-color: var(--color2);
+    border-bottom: 4px solid whitesmoke;
+
 }
 
 .curr-location {
     height: 100%;
+}
+
+.loc-name {
+    font-size: 2.5rem;
 }

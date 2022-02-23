@@ -1,12 +1,25 @@
-.map-container .map-info {
-    justify-content: center;
+main {
+    background-color: var(--color2);
+}
+
+.map-container {
+    padding-top: 2rem;
 }
 
 .map-container > * {
     flex-basis: 50%;
 }
 
-.map-container .map-info > * {
-    flex-basis: 50%;
+.map-container .map-info > :first-child {
+    flex-basis: 20%;
+}
+
+.locs .card > *:not(:first-child) {
+    padding-left: 20px;
+}
+
+.locs .card button {
+    align-self: center;
+    justify-self: center;
 
 }
