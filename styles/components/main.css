@@ -23,3 +23,17 @@ main {
     justify-self: center;
 
 }
+
+.btn-user-pos {
+    font-family: yanone;
+    font-size: 25px;
+    cursor: pointer;
+    position: absolute;
+    top: 640px;
+    height: 42px;
+    left: 50%;
+    width: 200px;
+    border: 2px solid white;
+    background-color: var(--color1);
+    color: whitesmoke;
+}
