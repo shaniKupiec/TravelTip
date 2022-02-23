@@ -25,8 +25,8 @@ function getLocs() {
 // saves location that the user search
 // TODO: link to service function search
 function addSaveLoc(name, lat, lng){
-    var olderLocIdx = gSavedLocs.findindex(loc => loc.name === name)
-    if(!olderLocIdx){
+    var olderLocIdx = gSavedLocs.findIndex(loc => loc.name === name)
+    if(olderLocIdx === -1){
         var newLoc = _createSavedLoc(name, lat, lng)
         gSavedLocs.push(newLoc)
     } else gSavedLocs[olderLocIdx].updatedAt = Date.now()
@@ -36,7 +36,7 @@ function addSaveLoc(name, lat, lng){
 // gets index of loc to delete
 // TODO: connect to onDeleteLoc
 function deleteLoc(locIdx){
-    var locToDeleteIdx = gSavedLocs.findindex(loc => loc.id === locIdx)
+    var locToDeleteIdx = gSavedLocs.findIndex(loc => loc.id === locIdx)
     gSavedLocs.splice(locToDeleteIdx, 1)
     gSavedLocs.push(newLoc)
 }
