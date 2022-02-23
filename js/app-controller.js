@@ -56,7 +56,7 @@ function renderLoc() {
             <p>Name: ${loc.name}</p>
                     <p>Lat: ${Math.floor(loc.lat)}</p>
                     <p>Lng: ${Math.floor(loc.lng)}</p>
-                    <button onclick="onDeleteLoc('${loc.id}')">Delete</button>
+                    <button onclick="onDeleteLoc(${loc.id})">Delete</button>
                     <button onclick="onPanTo(${loc.lat}, ${loc.lng}, '${
         loc.name
       }', ${loc.id})">GO</button>
