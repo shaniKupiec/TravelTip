@@ -1,7 +1,8 @@
 'use strict'
 
-import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
+import { locService } from './services/loc.service.js'
+
 
 window.onload = onInit;
 window.onAddMarker = onAddMarker;
@@ -22,13 +23,37 @@ function onInit() {
 
 function onSearch(ev) {
     ev.preventDefault();
-    const elInputSearch = document.querySelector('input[type=search]');
-    document.querySelector('.loc-name span').innerHTML = elInputSearch.value
+    const inputVal = document.querySelector('input[type=search]').value    
+    mapService.searchByTxt(inputVal)
+    .then(pos => {
+        mapService.addMarker(pos)
+        mapService.panTo(pos.lat, pos.lng)
+        document.querySelector('.loc-name span').innerText = inputVal
+        renderLoc()
+    })
+    .catch(err => console.log('error123'))
 }
 
 function onCopyLoc() {
-    
+
 }
+
+function renderLoc() {
+    locService.getLocs()
+    .then(locs => {
+        const strHTMLs = locs.map(loc => {
+            return `<h1>Locations: </h1>
+                    <p>Name: ${loc.name}</p>
+                    <p>Lat: ${loc.lat}</p>
+                    <p>Lng: ${loc.lng}</p>
+                    <button onclick="onDeleteLoc('${loc.id}')">Delete</button>
+            `
+        })
+        document.querySelector('.loc-table').innerHTML = strHTMLs.join('')
+    })
+}
+
+
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
 function getPosition() {
