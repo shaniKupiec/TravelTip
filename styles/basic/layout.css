@@ -1,4 +1,8 @@
-.main-layout {
+.header-layout {
     max-width: 1000px;
     margin: 0 auto;
+}
+
+.main-layout {
+    max-width: 1600px;
 }

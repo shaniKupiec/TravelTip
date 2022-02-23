@@ -1,0 +1,8 @@
+.nav-container {
+    height: 100px;
+    background-color: var(--color2);
+}
+
+.curr-location {
+    height: 100%;
+}

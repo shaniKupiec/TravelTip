@@ -2,7 +2,7 @@ header {
     height: 150px;
     background-color: var(--color1);
     padding: 20px;
-    border-bottom: 2px solid whitesmoke;
+    border-bottom: 4px solid whitesmoke;
 }
 
 header .header-container .logo {
