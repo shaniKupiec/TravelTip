@@ -17,7 +17,7 @@ var gSavedLocs = storageService.loadFromStorage(LOCS_KEY) || []
 function getLocs() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve(locs);
+            resolve(gSavedLocs);
         }, 2000)
     });
 }
