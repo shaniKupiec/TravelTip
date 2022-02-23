@@ -46,11 +46,13 @@ function renderLoc() {
     locService.getLocs()
     .then(locs => {
         const strHTMLs = locs.map(loc => {
-            return`<p>Name: ${loc.name}</p>
+            return`<div class="card flex">
+            <p>Name: ${loc.name}</p>
                     <p>Lat: ${loc.lat}</p>
                     <p>Lng: ${loc.lng}</p>
                     <button onclick="onDeleteLoc('${loc.id}')">Delete</button>
                     <button onclick="onPanTo(${loc.lat}, ${loc.lng})">GO</button>
+                    </div>
             `
         })
         document.querySelector('.locs').innerHTML = strHTMLs.join('')
