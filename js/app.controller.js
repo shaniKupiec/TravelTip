@@ -8,7 +8,8 @@ window.onAddMarker = onAddMarker;
 window.onPanTo = onPanTo;
 window.onGetLocs = onGetLocs;
 window.onGetUserPos = onGetUserPos;
-window.onSearch = onSearch
+window.onSearch = onSearch;
+window.onCopyLoc = onCopyLoc;
 
 // render map
 function onInit() {
@@ -22,6 +23,11 @@ function onInit() {
 function onSearch(ev) {
     ev.preventDefault();
     const elInputSearch = document.querySelector('input[type=search]');
+    document.querySelector('.loc-name span').innerHTML = elInputSearch.value
+}
+
+function onCopyLoc() {
+    
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
