@@ -19,11 +19,29 @@
         </div>
     </div>
 </header>
-    <div id="map" style="width: 100%; height: 400px;"></div>
+<nav class="nav-container">
+    <div class="curr-location header-layout flex space-between align-center">
+        <h2>Location: <span></span></h2> <button onclick="onCopyLoc()" class="copy-location">Copy Location</button>
+        
+    </div>
+    
+</nav>
+    <main>
+
+        <div class="map-container main-layout flex justify-center">
+            <div id="map" style="width: 100%; height: 400px;"></div>
+            <div class="map-info flex column">
+                <div style="" class="weather"></div>
+                <div class="loc-table"></div>
+            </div>
+
+        </div>
+    
     <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
     <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
     <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
     <button onclick="onPanTo()"class="btn-pan">Pan Map to Tokyo</button>
+    </main>
 
     <p>You are at: <span class="user-pos"></span></p>
     <p>Locations: <span class="locs"></span></p>
