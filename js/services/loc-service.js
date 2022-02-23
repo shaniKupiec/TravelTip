@@ -30,12 +30,15 @@ function addSaveLoc(name, lat, lng){
         gSavedLocs.push(newLoc)
     } else gSavedLocs[olderLocIdx].updatedAt = Date.now()
     storageService.saveToStorage(LOCS_KEY, gSavedLocs)
+    console.log(gSavedLocs);
 }
 
 // gets index of loc to delete
 function deleteLoc(locIdx){
     var locToDeleteIdx = gSavedLocs.findIndex(loc => loc.id === locIdx)
     gSavedLocs.splice(locToDeleteIdx, 1)
+    console.log('locIdx',locIdx);
+    console.log('locToDeleteIdx',locToDeleteIdx);
     console.log('gSavedLocs after delete', gSavedLocs);
     storageService.saveToStorage(LOCS_KEY, gSavedLocs)
 }
