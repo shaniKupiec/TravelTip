@@ -17,7 +17,7 @@ window.onCopyLoc = onCopyLoc;
 function onInit() {
     mapService.initMap()
         .then(() => {
-            console.log('Map is ready');
+            renderLoc()
         })
         .catch(() => console.log('Error: cannot init map'));
 }
@@ -43,8 +43,7 @@ function renderLoc() {
     locService.getLocs()
     .then(locs => {
         const strHTMLs = locs.map(loc => {
-            return `<h1>Locations: </h1>
-                    <p>Name: ${loc.name}</p>
+            return`<p>Name: ${loc.name}</p>
                     <p>Lat: ${loc.lat}</p>
                     <p>Lng: ${loc.lng}</p>
                     <button onclick="onDeleteLoc('${loc.id}')">Delete</button>
