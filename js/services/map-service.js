@@ -11,6 +11,8 @@ export const mapService = {
 
 var gMap;
 
+// function removeMarker()
+
 // init map on load
 function initMap(lat = 32.0749831, lng = 34.9120554) {
   console.log("InitMap");
@@ -20,16 +22,14 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
       center: { lat, lng },
       zoom: 15,
     });
-    console.log("Map!", gMap);
   });
 }
 
 function searchByTxt(address) {
-//   var address = "rehovot israel";
   var addressByFormat = address.split(" ").join("+");
   const API_GEO_KEY = `AIzaSyCzES929Y16KCfbjb0oIc09xQYNU9FxTSM`;
   const geoUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${addressByFormat}&key=${API_GEO_KEY}`;
-  console.log(geoUrl);
+  // console.log(geoUrl);
   const prm = axios
     .get(geoUrl)
     .then((res) => {
@@ -54,8 +54,6 @@ function addMarker(loc) {
   return marker;
 }
 
-// function removeMarker()
-
 // shows new loc on map
 function panTo(lat, lng) {
   var laLatLng = new google.maps.LatLng(lat, lng);
@@ -65,10 +63,10 @@ function panTo(lat, lng) {
 // inner func that upload map for first
 // WHY: window.google??
 function _connectGoogleApi() {
-  const API_KEY = "AIzaSyAJfCM2o8DvIAvQdLQcfjKiQpUYOdm0vO0";
+  const API_KEY = "AIzaSyAJfCM2o8DvIAvQdLQcfjKiQpUYOdm0vO0"; //roy
+  // const API_KEY = "AIzaSyBedKPrRyWUiVb8fa-ZB797zKI3l8ZzPbg"; //shani
   if (window.google) return Promise.resolve();
   var elGoogleApi = document.createElement("script");
-  // console.log(elGoogleApi);
   elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
   elGoogleApi.async = true;
   document.body.append(elGoogleApi);

@@ -1,6 +1,7 @@
 'use strict'
 
 import { storageService } from './storage-service.js'
+import { utilService } from './utils-service.js'
 
 export const locService = {
     getLocs,
@@ -10,11 +11,9 @@ export const locService = {
 }
 
 const LOCS_KEY = 'locations-data'
-var gId = 100;
 var gSavedLocs = storageService.loadFromStorage(LOCS_KEY) || []
 
 // return all saved locs
-// WHY: set time out??
 function getLocs() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -25,9 +24,7 @@ function getLocs() {
 
 // saves location that the user search
 function addSaveLoc(name, lat, lng){
-    console.log(gSavedLocs)
     var olderLocIdx = gSavedLocs.findIndex(loc => loc.name === name)
-    console.log(olderLocIdx)
     if(olderLocIdx < 0){
         var newLoc = _createSavedLoc(name, lat, lng)
         gSavedLocs.push(newLoc)
@@ -39,12 +36,13 @@ function addSaveLoc(name, lat, lng){
 function deleteLoc(locIdx){
     var locToDeleteIdx = gSavedLocs.findIndex(loc => loc.id === locIdx)
     gSavedLocs.splice(locToDeleteIdx, 1)
+    console.log('gSavedLocs after delete', gSavedLocs);
     storageService.saveToStorage(LOCS_KEY, gSavedLocs)
 }
 
 function _createSavedLoc(name, lat, lng){
     return {
-        id: gId++,
+        id: utilService.getRandomInt(0, 100),
         name: formatAdderss(name),
         lat,
         lng,
