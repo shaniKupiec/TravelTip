@@ -61,6 +61,7 @@ function panTo(lat, lng) {
 }
 
 // inner func that upload map for first
+// TODO: add API
 // WHY: window.google??
 function _connectGoogleApi() {
   const API_KEY = "AIzaSyAJfCM2o8DvIAvQdLQcfjKiQpUYOdm0vO0";
