@@ -1,5 +1,7 @@
 "use strict";
 
+import { locService } from './loc.service.js'
+
 export const mapService = {
   initMap,
   addMarker,
@@ -31,8 +33,10 @@ function searchByTxt(address) {
   const prm = axios
     .get(geoUrl)
     .then((res) => {
+      var pos = res.data.results[0].geometry.location
       console.log(res.data.results[0].geometry.location);
-      return res.data.results[0].geometry.location
+      locService.addSaveLoc(address, pos.lat, pos.lng)
+      return pos
     })
     .catch((err) => {
       console.log(err, "oops");
